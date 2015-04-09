@@ -49,14 +49,3 @@ write_row(E,Vars,A) :- write('  '), write(A), write('        '),
                        true_value(E,Vars,A,V), write(V), nl,
                        (successor(A,N) -> write_row(E,Vars,N) ; true).
 
-
-b_and(0,0,0).      
-b_or(0,0,0).      
-b_not(0,1).
-b_and(0,1,0).      
-b_or(0,1,1).      
-b_not(1,0).
-b_and(1,0,0).      
-b_or(1,0,1).
-b_and(1,1,1).      
-b_or(1,1,1).
