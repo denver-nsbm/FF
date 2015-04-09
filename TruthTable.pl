@@ -15,7 +15,13 @@
 find_vars(N,V,V) :- member(N,[0,1]),!.   
 find_vars(X,Vin,Vout) :- atom(X), 
                          (member(X,Vin) -> Vout = Vin ;  
-                         
+                                 Vout = [X|Vin]).                
+find_vars(X and Y,Vin,Vout) :- find_vars(X,Vin,Vtemp),
+                               find_vars(Y,Vtemp,Vout).
+find_vars(X or Y,Vin,Vout) :-  find_vars(X,Vin,Vtemp),
+                               find_vars(Y,Vtemp,Vout).
+find_vars(not X,Vin,Vout) :-   find_vars(X,Vin,Vout).
+
                          
                          
                          
