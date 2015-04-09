@@ -8,6 +8,17 @@
 
 */
 
+:- op(1000,xfy,'and').
+:- op(1000,xfy,'or').
+:- op(900,fy,'not').
+
+find_vars(N,V,V) :- member(N,[0,1]),!.   
+find_vars(X,Vin,Vout) :- atom(X), 
+                         (member(X,Vin) -> Vout = Vin ;  
+                         
+                         
+                         
+                         
 tt(E) :- find_vars(E,[],V),
          reverse(V,Vars),
          initial_assign(Vars,A),
