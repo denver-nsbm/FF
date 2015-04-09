@@ -32,20 +32,7 @@ successor(A,S) :- reverse(A,R),
 
 next([0|R],[1|R]).
 next([1|R],[0|S]) :- next(R,S).                   
-true_value(N,_,_,N) :- member(N,[0,1]).
-true_value(X,Vars,A,Val) :- atom(X),
-                             lookup(X,Vars,A,Val).
-true_value(X and Y,Vars,A,Val) :- true_value(X,Vars,A,VX),
-                                   true_value(Y,Vars,A,VY),
-                                   b_and(VX,VY,Val).
-true_value(X or Y,Vars,A,Val) :-  true_value(X,Vars,A,VX),
-                                   true_value(Y,Vars,A,VY),
-                                   b_or(VX,VY,Val).
-true_value(not X,Vars,A,Val) :-   true_value(X,Vars,A,VX),
-                                   b_not(VX,Val).
 
-lookup(X,[X|_],[V|_],V).
-lookup(X,[_|Vars],[_|A],V) :- lookup(X,Vars,A,V).  
                          
                          
                          
@@ -62,3 +49,14 @@ write_row(E,Vars,A) :- write('  '), write(A), write('        '),
                        true_value(E,Vars,A,V), write(V), nl,
                        (successor(A,N) -> write_row(E,Vars,N) ; true).
 
+
+b_and(0,0,0).      
+b_or(0,0,0).      
+b_not(0,1).
+b_and(0,1,0).      
+b_or(0,1,1).      
+b_not(1,0).
+b_and(1,0,0).      
+b_or(1,0,1).
+b_and(1,1,1).      
+b_or(1,1,1).
