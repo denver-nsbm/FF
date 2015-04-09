@@ -22,7 +22,16 @@ find_vars(X or Y,Vin,Vout) :-  find_vars(X,Vin,Vtemp),
                                find_vars(Y,Vtemp,Vout).
 find_vars(not X,Vin,Vout) :-   find_vars(X,Vin,Vout).
 
-                         
+      
+initial_assign([],[]).
+initial_assign([X|R],[0|S]) :- initial_assign(R,S).
+
+successor(A,S) :- reverse(A,R),
+                  next(R,N),
+                  reverse(N,S).
+
+next([0|R],[1|R]).
+next([1|R],[0|S]) :- next(R,S).                   
                          
                          
 tt(E) :- find_vars(E,[],V),
